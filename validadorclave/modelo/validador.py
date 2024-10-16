@@ -1,5 +1,6 @@
 from abc import abstractclassmethod, abstractmethod
 
+
 @abstractclassmethod
 class ReglaValidacion:
 
