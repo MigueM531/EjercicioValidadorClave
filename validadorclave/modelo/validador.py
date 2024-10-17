@@ -41,7 +41,10 @@ class ReglaValidacion(ABC):
 
 class Validador:
     def __init__(self, regla: ReglaValidacion):
-        pass
+        self.regla = regla
 
     def es_valida(self, clave: str) -> bool:
-        pass
+        if self.regla.es_valida(clave):
+            return True
+        else:
+            return False
