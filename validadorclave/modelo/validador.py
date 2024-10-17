@@ -48,3 +48,55 @@ class Validador:
             return True
         else:
             return False
+
+
+class ReglaValidacionGanimedes(ReglaValidacion):
+
+    def __init__(self):
+        super().__init__(8)
+
+    @staticmethod
+    def contiene_caracter_especial(clave: str) -> bool:
+        for caracter in clave:
+            if caracter in ["@", "_", "#", "$", "%"]:
+                return True
+            else:
+                pass
+        return False
+
+    def es_valida(self, clave: str) -> bool:
+        if not self._validar_longitud(clave):
+            raise NoCumpleLongitudMinimaError
+
+        if not self._contiene_mayuscula(clave):
+            raise NoTieneLetraMayusculaError
+
+        if not self._contiene_minuscula(clave):
+            raise NoTieneLetraMinusculaError
+
+        if not self._contiene_numero(clave):
+            raise NoTieneNumeroError
+
+        if not self.contiene_caracter_especial(clave):
+            raise NoTieneCaracterEspecialError
+
+        return True
+
+
+class ReglaValidacionCalisto(ReglaValidacion):
+
+    def __init__(self):
+        super().__init__(6)
+
+    @staticmethod
+    def contiene_calisto(clave: str) -> bool:
+        pass
+
+    def es_valida(self, clave: str) -> bool:
+        if not self._validar_longitud(clave):
+            raise NoCumpleLongitudMinimaError
+        if not self._contiene_numero(clave):
+            raise NoTieneNumeroError
+        if not self.contiene_calisto(clave):
+            raise NoTienePalabraSecretaError
+        return True
