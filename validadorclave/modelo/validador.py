@@ -55,13 +55,10 @@ class ReglaValidacionGanimedes(ReglaValidacion):
     def __init__(self):
         super().__init__(8)
 
-    @staticmethod
-    def contiene_caracter_especial(clave: str) -> bool:
+    def contiene_caracter_especial(self, clave: str) -> bool:
         for caracter in clave:
             if caracter in ["@", "_", "#", "$", "%"]:
                 return True
-            else:
-                pass
         return False
 
     def es_valida(self, clave: str) -> bool:
@@ -90,15 +87,8 @@ class ReglaValidacionCalisto(ReglaValidacion):
 
     @staticmethod
     def contiene_calisto(clave: str) -> bool:
-        posicion = clave.lower().find("calisto")
-        if posicion == -1:
-            return False
-        subseccion = clave[posicion:posicion + 7]
-        mayusculas = sum(1 for caracter in subseccion if caracter.isupper())
-        if 2 <= mayusculas < 7:
-            return True
-        else:
-            return False
+        mayusculas = sum(1 for caracter in clave if caracter.lower() in "calisto" and caracter.isupper())
+        return "calisto" in clave.lower() and 2 <= mayusculas < 7
 
     def es_valida(self, clave: str) -> bool:
         if not self._validar_longitud(clave):
@@ -108,3 +98,4 @@ class ReglaValidacionCalisto(ReglaValidacion):
         if not self.contiene_calisto(clave):
             raise NoTienePalabraSecretaError
         return True
+
