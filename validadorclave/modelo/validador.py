@@ -90,7 +90,15 @@ class ReglaValidacionCalisto(ReglaValidacion):
 
     @staticmethod
     def contiene_calisto(clave: str) -> bool:
-        pass
+        posicion = clave.lower().find("calisto")
+        if posicion == -1:
+            return False
+        subseccion = clave[posicion:posicion + 7]
+        mayusculas = sum(1 for caracter in subseccion if caracter.isupper())
+        if 2 <= mayusculas < 7:
+            return True
+        else:
+            return False
 
     def es_valida(self, clave: str) -> bool:
         if not self._validar_longitud(clave):
